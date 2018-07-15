@@ -10,11 +10,13 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="${conPath }/css/board.css" rel="stylesheet">
-		<script></script>
 		<title>게시글 보기</title>
 	</head>
 <body>
 <jsp:include page="../main/head.jsp" />
+<c:if test="${not empty LikeResult }">
+	<script>swal('${LikeResult}', '', 'success');</script>
+</c:if>
 <div id="wrap">
 <table id="content">
 	<tr>
@@ -36,6 +38,7 @@
 					<td>작성자 : <span class="boldCoral">${bDto.mName }</span></td>
 				</tr>
 			</table>
+			<button  class="boardLike" onclick="location.href = '${conPath }/BoardLikeService.do?bNum=${bDto.bNum }'" >좋아요</button>
 			<table class="boardCount">
 				<tr>
 					<td>조회수 <span class="boldCoral">${bDto.bCnt }</span> 좋아요 수 <span class="boldCoral">${bDto.bLike }</span></td>

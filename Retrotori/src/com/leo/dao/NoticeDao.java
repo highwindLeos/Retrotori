@@ -107,6 +107,48 @@ public class NoticeDao {
 		return dtos;
 	}
 	
+	public ArrayList<NoticeDto> getListNoticeNewFiveRows() { // 공지사항 리스트 최신 5건
+		ArrayList<NoticeDto> dtos = new ArrayList<NoticeDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT * FROM " + 
+				"(SELECT ROWNUM RN, A.* FROM " + 
+				"(SELECT * FROM NOTICE ORDER BY NRDATE DESC) A) " + 
+				"WHERE RN BETWEEN 1 AND 5";
+		
+		try {
+			conn = ds.getConnection();
+			pstmt = conn.prepareStatement(sql);		
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					 int nNum = rs.getInt("NNUM");
+					 String nTitle = rs.getString("NTITLE");
+					 String nContent = rs.getString("NCONTENT");
+					 String nAuthor = rs.getString("NAUTHOR");
+					 Date nRdate = rs.getDate("NRDATE");
+			
+				dtos.add(new NoticeDto(nNum, nTitle, nContent, nAuthor, nRdate) );
+				}while(rs.next());
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return dtos;
+	}
+	
 	public NoticeDto getNoticeOneRow(int nNum) {
 		NoticeDto dto = null;
 		

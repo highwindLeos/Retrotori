@@ -16,8 +16,9 @@
 <body>
 <jsp:include page="../main/head.jsp"/>
 <div id="wrap" class="center">
+	<h3 class="center boldCoral">현제 페이지는 공사중 입니다. 신속한 처리토록 하겠습니다.</h3>
+	<br />
 	<img src="https://media.giphy.com/media/8L0Pky6C83SzkzU55a/giphy.gif" alt="Error">
-	
 </div>
 <jsp:include page="../main/footer.jsp"/>
 </body>

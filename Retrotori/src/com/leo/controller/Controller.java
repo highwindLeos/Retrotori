@@ -13,6 +13,7 @@ import com.leo.service.AdminLoginService;
 import com.leo.service.BContentViewService;
 import com.leo.service.BDeleteService;
 import com.leo.service.BGetContentService;
+import com.leo.service.BLikeService;
 import com.leo.service.BListService;
 import com.leo.service.BModifyService;
 import com.leo.service.BReplyService;
@@ -21,6 +22,7 @@ import com.leo.service.BWriteService;
 import com.leo.service.MJoinService;
 import com.leo.service.MLoginOutService;
 import com.leo.service.MLoginService;
+import com.leo.service.MainNewListService;
 import com.leo.service.NDeleteService;
 import com.leo.service.NGetContent;
 import com.leo.service.NListService;
@@ -61,6 +63,8 @@ public class Controller extends HttpServlet {
 		
 		if (comDo.equals("/mainView.do")) {
 			
+			service = new MainNewListService();
+			service.excute(request, response);
 			viewPage = "main/main.jsp";
 			
 		} else if (comDo.equals("/loginForm.do")) {
@@ -190,6 +194,12 @@ public class Controller extends HttpServlet {
 			service = new BReplyService();
 			service.excute(request, response);
 			viewPage = "boardListView.do";
+			
+		} else if (comDo.equals("/BoardLikeService.do")) {
+			
+			service = new BLikeService();
+			service.excute(request, response);
+			viewPage = "boardContentView.do";
 			
 		}
 		

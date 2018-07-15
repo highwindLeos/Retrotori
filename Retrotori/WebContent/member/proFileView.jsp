@@ -52,6 +52,13 @@
 			<h4 class="center">팔로우 (Follow List)</h4>
 		</td>
 	</tr>
+	<c:if test="${empty followDtos }">
+	<tr>
+		<td class="center">
+			<h3 class="marginContent">현제 팔로우 하는 회원은 없습니다.</h3>
+		</td>
+	</tr>
+	</c:if>
 	<c:forEach items="${followDtos }" var="fDtos">
 	<tr>
 		<td class="center">
@@ -74,6 +81,13 @@
 			<h4 class="center">팔로워 (Follower List)</h4>			
 		</td>
 	</tr>
+	<c:if test="${empty followerDtos }">
+	<tr>
+		<td class="center">
+			<h3 class="marginContent">현제 팔로워가 없습니다.</h3>
+		</td>
+	</tr>
+	</c:if>
 	<c:forEach items="${followerDtos }" var="ferDtos">
 	<tr>
 		<td class="center">

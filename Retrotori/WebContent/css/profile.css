@@ -30,7 +30,7 @@ img#profileLogo{
 	position: absolute;
 	top : 30px;
 	right: 20px;
-	width: 800px;
+	width: 35vw;
 }
 
 .relative > table#pesonalInfo tr td {

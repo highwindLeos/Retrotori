@@ -92,6 +92,56 @@ public class BoardDao {
 		return bdtos;
 	}
 	
+	public ArrayList<BoardDto> getBoadListNewFiveRows(){ // 게시판 리스트 최신글 5개
+		ArrayList<BoardDto> bdtos = new ArrayList<BoardDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT * FROM " + 
+					 "(SELECT ROWNUM RN, A.* FROM (SELECT B.*, M.MNAME, MPHOTO FROM BOARD b, MEMBER M "
+				   + " WHERE M.MID = B.MID ORDER BY BREF DESC, BSTEP) A) " + 
+				     " WHERE RN BETWEEN 1 AND 5";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					 int bNum = rs.getInt("BNUM");
+					 String mId = rs.getString("MID");
+					 String bTitle = rs.getString("BTITLE");
+					 String bContent = rs.getString("BCONTENT");
+					 int bCnt = rs.getInt("BCNT");
+					 String bFile1 = rs.getString("BFILE1");
+					 int bRef = rs.getInt("BREF");
+					 int bStep = rs.getInt("BSTEP");
+					 int bLevel = rs.getInt("BLEVEL");
+					 int bLike = rs.getInt("BLIKE");
+					 String bIp = rs.getString("BIP");
+					 Date bRdate = rs.getDate("BRDATE");
+					 String mName = rs.getString("MNAME");
+					 String mPhoto = rs.getString("MPHOTO");
+					
+					bdtos.add(new BoardDto(bNum, mId, bTitle, bContent, bCnt, bFile1, bRef, bStep, bLevel, bLike, bIp, bRdate, mName, mPhoto));
+				}while (rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return bdtos;
+	}
+	
 	public int getBoardCnt() { // 글의 갯수를 구한다.
 		int result = 0;
 		
@@ -115,6 +165,42 @@ public class BoardDao {
 		} finally {
 			try {
 				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return result;
+	}
+	
+	public int contentLikeUp(int bNum) { // 글의 좋아요를 증가 한다.
+		int result = 0;
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE BOARD SET BLIKE = BLIKE + 1 WHERE BNUM = ?"; 
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, bNum);
+			
+			result = pstmt.executeUpdate();
+			
+			if (result > 0) {
+				System.out.println("좋아요 성공");
+				result = SUCCESS;
+			} else {
+				System.out.println("좋아요 실패");
+				result = FAIL;
+			}
+			
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
 				if(pstmt != null) pstmt.close();
 				if(conn != null) conn.close();
 			} catch (Exception e2) {}
