@@ -13,11 +13,17 @@ public class GameDto {
 	private int gGrade;
 	private int gVoteCnt;
 	private int gGno;
+	private String gRname;
+	private int lowPoint;
+	private int hiPoint;
+	private Double gradeAvg;
 	
 	public GameDto() { }
 
+	
+
 	public GameDto(String gId, String gName, String gImage, String gDes, String gPub, Date gRdate, int gGrade,
-			int gVoteCnt, int gGno) {
+			int gVoteCnt, int gGno, String gRname, int lowPoint, int hiPoint) {
 		this.gId = gId;
 		this.gName = gName;
 		this.gImage = gImage;
@@ -27,12 +33,39 @@ public class GameDto {
 		this.gGrade = gGrade;
 		this.gVoteCnt = gVoteCnt;
 		this.gGno = gGno;
+		this.gRname = gRname;
+		this.lowPoint = lowPoint;
+		this.hiPoint = hiPoint;
 	}
+
+	
+	
+	public GameDto(String gId, String gName, String gImage, String gDes, String gPub, Date gRdate, int gGrade,
+			int gVoteCnt, int gGno, String gRname, int lowPoint, int hiPoint, Double gradeAvg) {
+		super();
+		this.gId = gId;
+		this.gName = gName;
+		this.gImage = gImage;
+		this.gDes = gDes;
+		this.gPub = gPub;
+		this.gRdate = gRdate;
+		this.gGrade = gGrade;
+		this.gVoteCnt = gVoteCnt;
+		this.gGno = gGno;
+		this.gRname = gRname;
+		this.lowPoint = lowPoint;
+		this.hiPoint = hiPoint;
+		this.gradeAvg = gradeAvg;
+	}
+
+
 
 	@Override
 	public String toString() {
-		return "게임 정보 [gId=" + gId + ", gName=" + gName + ", gImage=" + gImage + ", gDes=" + gDes + ", gPub=" + gPub
-				+ ", gRdate=" + gRdate + ", gGrade=" + gGrade + ", gVoteCnt=" + gVoteCnt + ", gGno=" + gGno + "]";
+		return "GameDto [gId=" + gId + ", gName=" + gName + ", gImage=" + gImage + ", gDes=" + gDes + ", gPub=" + gPub
+				+ ", gRdate=" + gRdate + ", gGrade=" + gGrade + ", gVoteCnt=" + gVoteCnt + ", gGno=" + gGno
+				+ ", gRname=" + gRname + ", lowPoint=" + lowPoint + ", hiPoint=" + hiPoint + ", gradeAvg=" + gradeAvg
+				+ "]";
 	}
 
 	public String getgId() {
@@ -106,5 +139,37 @@ public class GameDto {
 	public void setgGno(int gGno) {
 		this.gGno = gGno;
 	}
-		
+
+	public String getgRname() {
+		return gRname;
+	}
+
+	public void setgRname(String gRname) {
+		this.gRname = gRname;
+	}
+
+	public int getLowPoint() {
+		return lowPoint;
+	}
+
+	public void setLowPoint(int lowPoint) {
+		this.lowPoint = lowPoint;
+	}
+
+	public int getHiPoint() {
+		return hiPoint;
+	}
+
+	public void setHiPoint(int hiPoint) {
+		this.hiPoint = hiPoint;
+	}
+
+	public Double getGradeAvg() {
+		return gradeAvg;
+	}
+
+	public void setGradeAvg(Double gradeAvg) {
+		this.gradeAvg = gradeAvg;
+	}	
+
 }

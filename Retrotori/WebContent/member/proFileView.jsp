@@ -14,6 +14,12 @@
 	</head>
 <body>
 <jsp:include page="../main/head.jsp" />
+<c:if test="${not empty follolwResult }">
+	<script>swal('${follolwResult }','','success');</script>
+</c:if>
+<c:if test="${not empty unfollolwResult }">
+	<script>swal('${unfollolwResult }','','success');</script>
+</c:if>
 <div id="wrap">
 <table id="profile">
 	<tr>
@@ -21,7 +27,20 @@
 			<img id="profileLogo" src="${conPath }/memberPhoto/${Mdto.mPhoto }" alt="회원사진" />
 			<c:if test="${sessionMdto.mId != Mdto.mId }">
 				<c:set var="isFollowing" value="1" />
-				<button onclick="location.href = '${conPath}/Follow.do?mId=${Mdto.mId }'">팔로우 하기</button>
+				<c:forEach items="${followerDtos }" var="follower">
+					<c:if test="${follower.mId == sessionMdto.mId }">
+						<c:set var="isFollowing" value="0" />
+					</c:if>					
+					<c:if test="${follower.mId != sessionMdto.mId }">
+						<c:set var="isFollowing" value="1" />
+					</c:if>					
+				</c:forEach>
+				<c:if test="${isFollowing == 1 }">			
+					<button class="btnFollow" onclick="location.href = '${conPath}/Follow.do?mId=${sessionMdto.mId }&fId=${Mdto.mId }&mName=${Mdto.mName }'">${Mdto.mName } 팔로우 하기</button>
+				</c:if>
+				<c:if test="${isFollowing == 0 }">			
+					<button class="btnFollow" onclick="location.href = '${conPath}/UnFollow.do?mId=${sessionMdto.mId }&fId=${Mdto.mId }&mName=${Mdto.mName }'">${Mdto.mName } 언 팔로우 하기</button>
+				</c:if>
 			</c:if>
 		</td>
 		<td class="relative">

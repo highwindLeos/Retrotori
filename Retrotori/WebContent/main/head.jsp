@@ -61,7 +61,7 @@
 			<li><a href="${conPath }/mainView.do"><i class="fas fa-home"></i> 홈</a></li>
 			<li><a href=""><i class="fab fa-glide"></i> 이용안내</a></li>
 			<li><a href=""><i class="fas fa-search"></i> 게임검색</a></li>
-			<li><a href=""><i class="fas fa-list-alt"></i> 게임리스트</a></li>
+			<li><a href="${conPath }/gameListView.do"><i class="fas fa-list-alt"></i> 게임리스트</a></li>
 			<li><a href="${conPath }/boardListView.do"><i class="fas fa-keyboard"></i> 자유게시판</a></li>
 		</ul>
 	</div>

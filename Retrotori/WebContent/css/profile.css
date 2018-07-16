@@ -63,3 +63,23 @@ img#profileLogo{
    	transition: all .25s;
 }
 
+.btnFollow {
+	position : relative;
+	top : -50px;
+	left : 40px;
+	padding : 10px;
+	width: 160px;
+	height: 40px;
+	border : none;
+	color : #fff;
+	background-color: rgba(120, 120, 120, .8);
+	cursor: pointer;
+	webkit-transition: all .25s; /* Safari */
+   	transition: all .25s;
+}
+	.btnFollow:hover {
+		border : 2px solid #666;
+		border-radius : 20px;
+		color : #000;
+		background-color: rgba(200, 200, 200, .8);
+	}

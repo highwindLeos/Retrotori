@@ -19,9 +19,14 @@ import com.leo.service.BModifyService;
 import com.leo.service.BReplyService;
 import com.leo.service.BReplyViewService;
 import com.leo.service.BWriteService;
+import com.leo.service.GContentViewService;
+import com.leo.service.GListViewService;
+import com.leo.service.GVoteService;
+import com.leo.service.MFollowService;
 import com.leo.service.MJoinService;
 import com.leo.service.MLoginOutService;
 import com.leo.service.MLoginService;
+import com.leo.service.MUnFollowService;
 import com.leo.service.MainNewListService;
 import com.leo.service.NDeleteService;
 import com.leo.service.NGetContent;
@@ -109,8 +114,20 @@ public class Controller extends HttpServlet {
 			service.excute(request, response);
 			viewPage = "member/proFileView.jsp";
 			
-		} else if (comDo.equals("/notice.do")) {
+		} else if (comDo.equals("/Follow.do")) {
 			
+			service = new MFollowService();
+			service.excute(request, response);
+			viewPage = "/profileView.do";
+		
+		} else if (comDo.equals("/UnFollow.do")) {
+			
+			service = new MUnFollowService();
+			service.excute(request, response);
+			viewPage = "/profileView.do";
+			
+		} else if (comDo.equals("/notice.do")) {
+		
 			service = new NListService();
 			service.excute(request, response);
 			viewPage = "notice/noticeView.jsp";
@@ -201,6 +218,24 @@ public class Controller extends HttpServlet {
 			service.excute(request, response);
 			viewPage = "boardContentView.do";
 			
+		} else if (comDo.equals("/gameListView.do")) {
+			
+			service = new GListViewService();
+			service.excute(request, response);
+			viewPage = "game/gameListView.jsp";
+			
+		} else if (comDo.equals("/gameContentView.do")) {
+			
+			service = new GContentViewService();
+			service.excute(request, response);
+			viewPage = "game/gameContentView.jsp";
+			
+		} else if (comDo.equals("/gameVote.do")) {
+			
+			service = new GVoteService();
+			service.excute(request, response);
+			viewPage = "gameContentView.do";
+
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

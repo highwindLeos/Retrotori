@@ -136,10 +136,11 @@ COMMIT;
 -- 게임 테이블
 ---------------------------------------------------------------------------------------
 -- top-n 페이징 기능 (게임 리스트)
-SELECT * 
+SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 1) GRADEAVG 
         FROM GAME GA, GGRADE R 
         WHERE
-        GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT ORDER BY GRDATE DESC;
+        GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT AND gId LIKE '2'
+ORDER BY GRDATE DESC;
 
 SELECT RN, GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GGNO, GRNAME, LOWPOINT, HIPOINT FROM
     (SELECT ROWNUM RN, A.* FROM 
@@ -153,7 +154,7 @@ SELECT COUNT(*) FROM GAME;
 
 -- 게임 등록하기
 INSERT INTO GAME (gId, gName, gImage, gDes, gPub, gRdate, gGrade, gVoteCnt, gGno)
-VALUES (GAME_SEQ.NEXTVAL, '게임이름', 'gameimage.jpg', '게임 설명', '제작사', '1984-07-05', 0, 0, 1);
+VALUES (GAME_SEQ.NEXTVAL, '게임이름4', 'gameimage.jpg', '게임 설명4', '제작사4', '1984-07-05', 0, 0, 1);
 
 COMMIT;
 -- 게임 정보수정
@@ -163,12 +164,13 @@ UPDATE GAME SET
             gDes = '수정본문', 
             gPub = '수정 제작사',
             gRdate = '1988-06-05'
-WHERE gId = 1;
+WHERE gId = '2';
 
+UPDATE GAME SET GVOTECNT = 2500 WHERE GID = '2';
 -- 게임 삭제
-DELETE FROM GAME WHERE gId = 1;
+DELETE FROM GAME WHERE gId = '21';
 commit;
-
+rollback;
 -- 게임 투표 하기 
 UPDATE GAME SET GGRADE = GGRADE + 10, GVOTECNT = GVOTECNT + 1
 WHERE GID = 2;
@@ -279,20 +281,20 @@ commit;
 ------------------------------------------------
 -- 팔로우 기능
 ------------------------------------------------
-SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.MID = M.MID;
+SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.FID = M.MID;
 -- 팔로워 가져오기
-SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.MID = M.MID AND FID = 'days';
-SELECT count(*) FROM FOLLOW WHERE FID = 'days';
+SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.MID = M.MID AND FID = 'leo';
+SELECT count(*) FROM FOLLOW WHERE FID = 'leo';
 
 -- 팔로우 가져오기
-SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.FID = M.MID AND F.MID ='days';
-SELECT count(*) FROM FOLLOW WHERE MID = 'days';
+SELECT FNUM, F.MID, FID, MNAME, MPHOTO FROM FOLLOW F, MEMBER M WHERE F.FID = M.MID AND F.MID ='leo';
+SELECT count(*) FROM FOLLOW WHERE MID = 'leo';
 
 -- 팔로우 하기
-INSERT INTO FOLLOW (FNUM, MID, FID) VALUES (FOLLOW_SEQ.NEXTVAL, 'leoday', 'days');
+INSERT INTO FOLLOW (FNUM, MID, FID) VALUES (FOLLOW_SEQ.NEXTVAL, 'leo', 'days');
 
 -- 언팔로우 하기
-DELETE FROM FOLLOW WHERE FID = 'leoday';
+DELETE FROM FOLLOW WHERE FID = 'days';
 
 COMMIT;
 ------------------------------------------------
