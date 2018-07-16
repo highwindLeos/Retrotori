@@ -24,9 +24,11 @@
 	 <c:if test="${totalCnt != 0 }">
 		<c:forEach var="gameDto" items="${gamelist }">
 		<figure>
-		   <h3 class="gamegName left"><i class="fas fa-gamepad colorDarkGray"></i>
-		   <span class="colorDarkgray">${gameDto.gName }</span></h3>
-	       <a href="${conPath }/gameContentView.do?gId=${gameDto.gId }"><img id="gameImage" src="${conPath }/gameImg/${gameDto.gImage }" alt="${gameDto.gImage }"></a>
+		   <h3 class="gamegName left colorDarkGray"><i class="fas fa-gamepad"></i>
+		   <span>${gameDto.gName }</span></h3>
+	       <a href="${conPath }/gameContentView.do?gId=${gameDto.gId }">
+	       		<img id="gameImage" src="${conPath }/gameImg/${gameDto.gImage }" alt="${gameDto.gImage }">
+	       </a>
 	       <figcaption>
 	       		<p class="gamegPub">${gameDto.gPub }</p>
 	       		<p class="gamegRdate"><fmt:formatDate value="${gameDto.gRdate }" pattern="yyyy.MM.dd"/></p>
@@ -41,6 +43,8 @@
 	<input type="button" value="게임등록" onclick="location.href = '${conPath }/gameWriteForm.do'" >		
  </div>
 </c:if>
+<br />
+<hr />
  <div id="pageBoard" class="center">
 	<%-- 이전 1 2 3 4 5 6 7 8 9 10 다음 --%>
 	<c:if test="${startPage > BLOCKSIZE }">

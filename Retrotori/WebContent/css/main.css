@@ -48,9 +48,13 @@ div#header{
 .logo {
 	padding : 15px 0;
 	cursor: pointer;
-	-webkit-transition: all 2s; /* Safari */
-    transition: all 2s;
+	-webkit-transition: all .5s; /* Safari */
+    transition: all .5s;
 }
+	.logo:hover {
+		margin : 70px 0;
+		border: 4px solid #fff;
+	}
 
 
 /* GNB */
@@ -99,15 +103,19 @@ ul#lnb li{
     width: 20vw;
     height: 40px;
     line-height : 40px;
-    background-color: rgba(110, 110, 110, 0.3);
-    text-align: center;
+	background: -moz-linear-gradient(top,  rgba(254,187,187,.5) 0%, rgba(125,185,232,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  rgba(254,187,187,.5) 0%,rgba(125,185,232,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  rgba(254,187,187,.5) 0%,rgba(125,185,232,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#febbbb', endColorstr='#007db9e8',GradientType=0 ); /* IE6-9 */
+/*  background-color: rgba(110, 110, 110, 0.3); */    
+	text-align: center;
     font-weight : bold;
     -webkit-transition: all .5s; /* Safari */
     transition: all .5s;
 }
 
 ul#lnb li:hover{
-    background-color: rgba(3, 122, 176, 0.3);
+    background-color: rgba(254,187,187,.4);
 }
 
 ul#lnb li a{
@@ -160,16 +168,15 @@ ul#lnb > li > ul > li:nth-child(even):hover{
 	}
 /* Slide single-item */
 .single-item{
-	height: 400px;
-	margin-top: 20px;
+	height: 300px;
 	margin-bottom: 20px;
-	opacity : .9;
+	opacity : .85;
 	text-align: center;
 }	
 
 .slideImg{
 	width : 100%;
-	height: 400px;
+	height: 300px;
 }
 	
 /* Main */

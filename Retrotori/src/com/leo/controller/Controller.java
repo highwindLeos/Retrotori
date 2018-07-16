@@ -22,6 +22,7 @@ import com.leo.service.BWriteService;
 import com.leo.service.GContentViewService;
 import com.leo.service.GListViewService;
 import com.leo.service.GVoteService;
+import com.leo.service.GWriteService;
 import com.leo.service.MFollowService;
 import com.leo.service.MJoinService;
 import com.leo.service.MLoginOutService;
@@ -236,6 +237,22 @@ public class Controller extends HttpServlet {
 			service.excute(request, response);
 			viewPage = "gameContentView.do";
 
+		}  else if (comDo.equals("/gameVote.do")) {
+			
+			service = new GVoteService();
+			service.excute(request, response);
+			viewPage = "gameContentView.do";
+
+		} else if (comDo.equals("/gameWriteForm.do")) {
+			
+			viewPage = "game/gaWriteForm.jsp";
+			
+		}  else if (comDo.equals("/gameWrite.do")) {
+			
+			service = new GWriteService();
+			service.excute(request, response);
+			viewPage = "/gameListView.do";
+			
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
