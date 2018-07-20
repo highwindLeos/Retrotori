@@ -13,7 +13,6 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
 		<link href="${conPath }/css/reset.css" rel="stylesheet">
 		<link href="${conPath }/css/main.css" rel="stylesheet">
-		<script></script>
 		<title>Login</title>
 	</head>
 <body>

@@ -141,6 +141,130 @@ public class GameDao {
 		return gdtos;
 	}
 	
+	public ArrayList<GameDto> getGameListSearch(String gName, String gPub, String gDes){ // 게임 일반 검색 3개 필드 기준
+		ArrayList<GameDto> gdtos = new ArrayList<GameDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, " + 
+					 "TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) GRADEAVG " + 
+					 "FROM GAME GA, GGRADE R " + 
+					 "WHERE " + 
+					 "GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT " + 
+					 "AND UPPER(GNAME) LIKE '%'||?||'%' " + 
+					 "AND UPPER(GPUB) LIKE '%'||?||'%' " + 
+					 "AND UPPER(GDES) LIKE '%'||?||'%' " + 
+					 "ORDER BY GRDATE DESC";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, gName);
+			pstmt.setString(2, gPub);
+			pstmt.setString(3, gDes);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					 String gId = rs.getString("GID");
+					 gName = rs.getString("GNAME");
+					 String gImage = rs.getString("GIMAGE");
+					 gDes = rs.getString("GDES");
+					 gPub = rs.getString("GPUB");
+					 Date gRdate = rs.getDate("GRDATE");
+					 int gGrade = rs.getInt("GGRADE");
+					 int gVoteCnt = rs.getInt("GVOTECNT");
+					 int gGno = rs.getInt("GGNO");
+					 String gRname = rs.getString("GRNAME");
+					 int lowPoint = rs.getInt("LOWPOINT");
+					 int hiPoint = rs.getInt("HIPOINT");
+					 double gradeAvg = rs.getInt("GRADEAVG");
+
+					 gdtos.add(new GameDto(gId, gName, gImage, gDes, gPub, gRdate, gGrade, gVoteCnt, gGno, gRname, lowPoint, hiPoint, gradeAvg));
+				}while (rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return gdtos;
+	}
+	
+	public ArrayList<GameDto> getGameListDetailSearch(String gName, String gPub, String gDes, int gGno, int gGrade, String gId){ // 게임 상세 검색 6개 필드 기준
+		ArrayList<GameDto> gdtos = new ArrayList<GameDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, " + 
+					" TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) GRADEAVG " + 
+					" FROM GAME GA, GGRADE R " + 
+					"	        WHERE " + 
+					"	        GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT " + 
+					"	        AND UPPER(GNAME) LIKE '%'||?||'%' " + 
+					"	        AND UPPER(GPUB)  LIKE '%'||?||'%' " + 
+					"	        AND UPPER(GDES) LIKE '%'||?||'%' " + 
+					"	        AND GA.GGNO = ? " + 
+					"	        AND TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) >= ? " + 
+					"	        AND UPPER(GID) LIKE ?||'%' " + 
+					"	ORDER BY GRDATE DESC";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, gName);
+			pstmt.setString(2, gPub);
+			pstmt.setString(3, gDes);
+			pstmt.setInt(4, gGno);
+			pstmt.setInt(5, gGrade);
+			pstmt.setString(6, gId);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					 gId = rs.getString("GID");
+					 gName = rs.getString("GNAME");
+					 String gImage = rs.getString("GIMAGE");
+					 gDes = rs.getString("GDES");
+					 gPub = rs.getString("GPUB");
+					 Date gRdate = rs.getDate("GRDATE");
+					 gGrade = rs.getInt("GGRADE");
+					 int gVoteCnt = rs.getInt("GVOTECNT");
+					 gGno = rs.getInt("GGNO");
+					 String gRname = rs.getString("GRNAME");
+					 int lowPoint = rs.getInt("LOWPOINT");
+					 int hiPoint = rs.getInt("HIPOINT");
+					 double gradeAvg = rs.getInt("GRADEAVG");
+
+					 gdtos.add(new GameDto(gId, gName, gImage, gDes, gPub, gRdate, gGrade, gVoteCnt, gGno, gRname, lowPoint, hiPoint, gradeAvg));
+				}while (rs.next());
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+		
+		return gdtos;
+	}
+	
 	public int getGameCnt() { // 게임의 갯수를 구한다.
 		int result = 0;
 		
@@ -174,24 +298,25 @@ public class GameDao {
 	
 	
 	
-	public int writeGame(GameDto dto) { //원글 쓰기
+	public int writeGame(GameDto dto) { //게임등록 쓰기
 		int result = FAIL;
 				
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
 		String insertSql = "INSERT INTO GAME (gId, gName, gImage, gDes, gPub, gRdate, gGrade, gVoteCnt, gGno) " + 
-						   "VALUES (GAME_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0, 0, 1)";
+						   "VALUES (?||GAME_SEQ.NEXTVAL, ?, ?, ?, ?, ?, 0, 0, 1)";
 		
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(insertSql);		
 			
-			pstmt.setString(1, dto.getgName());
-			pstmt.setString(2, dto.getgImage());
-			pstmt.setString(3, dto.getgDes());
-			pstmt.setString(4, dto.getgPub());
-			pstmt.setDate(5, dto.getgRdate());
+			pstmt.setString(1, dto.getgIdTag());
+			pstmt.setString(2, dto.getgName());
+			pstmt.setString(3, dto.getgImage());
+			pstmt.setString(4, dto.getgDes());
+			pstmt.setString(5, dto.getgPub());
+			pstmt.setDate(6, dto.getgRdate());
 			
 			int temp = pstmt.executeUpdate();
 			
@@ -275,7 +400,7 @@ public class GameDao {
 		return dto;
 	}
 	
-	public int modifyGame(String gName, String gImage, String gDes, String gPub, Date grDate, String gId) {
+	public int modifyGame(String gName, String gImage, String gDes, String gPub, Date gRdate, String gId) {
 		int result = FAIL;
 		
 		Connection conn = null;
@@ -297,7 +422,7 @@ public class GameDao {
 			pstmt.setString(2, gImage);
 			pstmt.setString(3, gDes);
 			pstmt.setString(4, gPub);
-			pstmt.setDate(5, grDate);
+			pstmt.setDate(5, gRdate);
 			
 			pstmt.setString(6, gId);
 			
@@ -331,6 +456,7 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = "UPDATE GAME SET " + 
+					 "            gId = ?, " + 
 					 "            gName = ?, " + 
 					 "            gImage = ?, " + 
 					 "            gDes = ?, " + 
@@ -342,13 +468,14 @@ public class GameDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, dto.getgName());
-			pstmt.setString(2, dto.getgImage());
-			pstmt.setString(3, dto.getgDes());
-			pstmt.setString(4, dto.getgPub());
-			pstmt.setDate(5, dto.getgRdate());
+			pstmt.setString(1, dto.getgIdTag() + dto.getgId());
+			pstmt.setString(2, dto.getgName());
+			pstmt.setString(3, dto.getgImage());
+			pstmt.setString(4, dto.getgDes());
+			pstmt.setString(5, dto.getgPub());
+			pstmt.setDate(6, dto.getgRdate());
 			
-			pstmt.setString(6, dto.getgId());
+			pstmt.setString(7, dto.getgId());
 			
 			int temp = pstmt.executeUpdate();
 			

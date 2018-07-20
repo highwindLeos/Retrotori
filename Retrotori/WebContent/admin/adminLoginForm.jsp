@@ -9,15 +9,11 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://fonts.googleapis.com/css?family=Arvo|Lato|Roboto+Condensed" rel="stylesheet">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css">
-		<link href="${conPath }/css/reset.css" rel="stylesheet">
-		<link href="${conPath }/css/main.css" rel="stylesheet">
 		<script></script>
 		<title>Login</title>
 	</head>
 <body>
-<c:if test="${not empty loginOk }">
+<c:if test="${not empty adminOk }">
 <script>location.href = 'mainView.do';</script>
 </c:if>
 <c:if test="${not empty registerResuilt }">

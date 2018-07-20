@@ -16,7 +16,7 @@
 <jsp:include page="../main/head.jsp" />
 <div id="WriteForm">
 	<form action="${conPath }/boardWrite.do" method="POST" enctype="multipart/form-data">
-	<input type="hidden" name="mId" value="${Mdto.mId }" />
+	<input type="hidden" name="mId" value="${sessionMdto.mId }" />
 	<table>
 		<tr>
 			<td>글 제목</td>

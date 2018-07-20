@@ -60,8 +60,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-		<c:if test="${bDto.mId == sessionMdto.mId }"><%-- 로그인 하고 자기글만 보임 --%>
+		<td class="center">
+		<c:if test="${bDto.mId == sessionMdto.mId or not empty adminOk }"><%-- 로그인 하고 자기글과  관리자는  보임--%>
 			<input type="button" value="글수정" onclick="location.href = 'boardModifyForm.do?bNum=${bDto.bNum}&pageNum=${currentPage }'" />
 			<input type="button" value="글삭제" onclick="location.href = 'boardDelete.do?bNum=${bDto.bNum}&pageNum=${currentPage }'" />
 		</c:if>

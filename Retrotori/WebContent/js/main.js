@@ -9,4 +9,11 @@ $(document).ready(function() {
 	$('.boardLike').mouseout(function() {
 		$(this).html('좋아요');
 	});
+	
+	 var coin = new Audio('http://localhost:8181/Retrotori/js/source/Coin.wav');
+	$('.logo').hover(function(){
+		coin.play();
+	});
+	
+	 
 }); // 좋아요 버튼 올리기이벤트

@@ -11,8 +11,7 @@ div.notice{
 	padding : 10px 100px;
 	background-image: url('../img/noticeBackground.png');
 	background-size : cover;
-	border: 1px solid lightpink;
-	border-radius: 5px 5px 0 0;
+	border-radius: 10px 10px 10px 10px;
 	cursor: pointer;
 }
 
@@ -49,7 +48,7 @@ div.notice{
 	font-size : 1.2em;
 	background-color: rgba(255, 255, 255, 1);
 	border: 1px solid lightpink;
-	border-radius: 0 0 10px 10px;
+	border-radius: 10px 10px 10px 10px;
 }
 
 /* 공지 수정 삭제 버튼*/

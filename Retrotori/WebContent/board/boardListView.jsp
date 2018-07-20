@@ -45,7 +45,7 @@
 			<tr>
 				<td>${dto.bNum }</td>
 				<td>${dto.mId }</td>
-				<td>${dto.mName }</td>
+				<td><a href="${conPath }/profileView.do?mId=${dto.mId }">${dto.mName }</a></td>
 				<td>
 					<c:forEach var="i" begin="1" end="${dto.bLevel }" >
 						 <c:if test="${i == dto.bLevel }">

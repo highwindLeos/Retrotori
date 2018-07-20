@@ -14,6 +14,12 @@
 	</head>
 <body>
 <jsp:include page="../main/head.jsp" />
+<c:if test="${not empty writeGameResult }">
+	<script>swal('${writeGameResult }','','success');</script>
+</c:if>
+<c:if test="${not empty gameDeleteResult }">
+	<script>swal('${gameDeleteResult }','','success');</script>
+</c:if>
 <div id="games">
 	 <c:if test="${totalCnt eq 0 }">
 	 <figure>
@@ -38,7 +44,7 @@
 		</c:forEach>
 	 </c:if>
 </div>
-<c:if test="${not empty adminOk or not empty loginOk }">
+<c:if test="${not empty adminOk }">
  <div class="center">
 	<input type="button" value="게임등록" onclick="location.href = '${conPath }/gameWriteForm.do'" >		
  </div>

@@ -9,7 +9,6 @@ public class AdminDto {
 	public AdminDto() {	}
 
 	public AdminDto(int aNum, String aId, String aPw, String aName) {
-		super();
 		this.aNum = aNum;
 		this.aId = aId;
 		this.aPw = aPw;

@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class GameDto {
 
+	private String gIdTag;
 	private String gId;
 	private String gName;
 	private String gImage;
@@ -21,6 +22,15 @@ public class GameDto {
 	public GameDto() { }
 
 	
+	public GameDto(String gIdTag, String gId, String gName, String gImage, String gDes, String gPub, Date gRdate) {
+		this.gIdTag = gIdTag;
+		this.gId = gId;
+		this.gName = gName;
+		this.gImage = gImage;
+		this.gDes = gDes;
+		this.gPub = gPub;
+		this.gRdate = gRdate;
+	}
 
 	public GameDto(String gId, String gName, String gImage, String gDes, String gPub, Date gRdate, int gGrade,
 			int gVoteCnt, int gGno, String gRname, int lowPoint, int hiPoint) {
@@ -57,16 +67,27 @@ public class GameDto {
 		this.hiPoint = hiPoint;
 		this.gradeAvg = gradeAvg;
 	}
-
-
-
+	
+	
+	
 	@Override
 	public String toString() {
-		return "GameDto [gId=" + gId + ", gName=" + gName + ", gImage=" + gImage + ", gDes=" + gDes + ", gPub=" + gPub
-				+ ", gRdate=" + gRdate + ", gGrade=" + gGrade + ", gVoteCnt=" + gVoteCnt + ", gGno=" + gGno
-				+ ", gRname=" + gRname + ", lowPoint=" + lowPoint + ", hiPoint=" + hiPoint + ", gradeAvg=" + gradeAvg
-				+ "]";
+		return "게임정보 [gIdTag=" + gIdTag + ", gId=" + gId + ", gName=" + gName + ", gImage=" + gImage + ", gDes="
+				+ gDes + ", gPub=" + gPub + ", gRdate=" + gRdate + ", gGrade=" + gGrade + ", gVoteCnt=" + gVoteCnt
+				+ ", gGno=" + gGno + ", gRname=" + gRname + ", lowPoint=" + lowPoint + ", hiPoint=" + hiPoint
+				+ ", gradeAvg=" + gradeAvg + "]";
 	}
+
+
+	public String getgIdTag() {
+		return gIdTag;
+	}
+
+
+	public void setgIdTag(String gIdTag) {
+		this.gIdTag = gIdTag;
+	}
+
 
 	public String getgId() {
 		return gId;

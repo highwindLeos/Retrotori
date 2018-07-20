@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.leo.service.AdminLoginService;
+import com.leo.service.AdminManageService;
 import com.leo.service.BContentViewService;
 import com.leo.service.BDeleteService;
 import com.leo.service.BGetContentService;
@@ -19,14 +20,24 @@ import com.leo.service.BModifyService;
 import com.leo.service.BReplyService;
 import com.leo.service.BReplyViewService;
 import com.leo.service.BWriteService;
+import com.leo.service.GComantDeleteService;
+import com.leo.service.GComantService;
 import com.leo.service.GContentViewService;
+import com.leo.service.GDeleteService;
+import com.leo.service.GGameContentService;
 import com.leo.service.GListViewService;
+import com.leo.service.GModifyService;
 import com.leo.service.GVoteService;
 import com.leo.service.GWriteService;
+import com.leo.service.GsearchGameDetailService;
+import com.leo.service.GsearchGameService;
+import com.leo.service.MDeleteService;
 import com.leo.service.MFollowService;
 import com.leo.service.MJoinService;
 import com.leo.service.MLoginOutService;
 import com.leo.service.MLoginService;
+import com.leo.service.MMemberGetService;
+import com.leo.service.MModifyService;
 import com.leo.service.MUnFollowService;
 import com.leo.service.MainNewListService;
 import com.leo.service.NDeleteService;
@@ -108,6 +119,26 @@ public class Controller extends HttpServlet {
 			service = new MJoinService();
 			service.excute(request, response);
 			viewPage = "loginForm.do";
+			
+		} else if (comDo.equals("/memberModifyForm.do")) {
+			
+			viewPage = "member/modifyForm.jsp";
+			
+		} else if (comDo.equals("/modify.do")) {
+			
+			service = new MModifyService();
+			service.excute(request, response);
+			viewPage = "mainView.do";
+			
+		} else if (comDo.equals("/memberDeleteForm.do")) {
+			
+			viewPage = "member/deleteFrom.jsp";
+			
+		} else if (comDo.equals("/delete.do")) {
+			
+			service = new MDeleteService();
+			service.excute(request, response);
+			viewPage = "/mainView.do";
 			
 		} else if (comDo.equals("/profileView.do")) {
 			
@@ -237,21 +268,75 @@ public class Controller extends HttpServlet {
 			service.excute(request, response);
 			viewPage = "gameContentView.do";
 
-		}  else if (comDo.equals("/gameVote.do")) {
-			
-			service = new GVoteService();
-			service.excute(request, response);
-			viewPage = "gameContentView.do";
-
 		} else if (comDo.equals("/gameWriteForm.do")) {
 			
-			viewPage = "game/gaWriteForm.jsp";
+			viewPage = "game/gameWriteForm.jsp";
 			
-		}  else if (comDo.equals("/gameWrite.do")) {
+		} else if (comDo.equals("/gameWrite.do")) {
 			
 			service = new GWriteService();
 			service.excute(request, response);
 			viewPage = "/gameListView.do";
+			
+		} else if (comDo.equals("/gameDelete.do")) {
+			
+			service = new GDeleteService();
+			service.excute(request, response);
+			viewPage = "/gameListView.do";
+			
+		} else if (comDo.equals("/gameModifyView.do")) {
+			
+			service = new GGameContentService();
+			service.excute(request, response);
+			viewPage = "game/gameModifyForm.jsp";
+			
+		} else if (comDo.equals("/gameModify.do")) {
+			
+			service = new GModifyService();
+			service.excute(request, response);
+			viewPage = "/gameListView.do";
+			
+		} else if (comDo.equals("/comantWrite.do")) {
+			
+			service = new GComantService();
+			service.excute(request, response);
+			viewPage = "gameContentView.do";
+			
+		} else if (comDo.equals("/deleteComant.do")) { 
+			
+			service = new GComantDeleteService();
+			service.excute(request, response);
+			viewPage = "gameContentView.do";
+			
+		} else if (comDo.equals("/gameSearchView.do")) {
+		
+			viewPage = "game/gameSearchView.jsp";
+			
+		} else if (comDo.equals("/searchGame.do")) {
+		
+			service = new GsearchGameService();
+			service.excute(request, response);
+			viewPage = "game/gameSearchResult.jsp";
+			
+		} else if (comDo.equals("/searchDetailView.do")) {
+			
+			viewPage = "game/gameSearchDetailView.jsp";
+			
+		} else if (comDo.equals("/searchGameDetail.do")) {
+		
+			service = new GsearchGameDetailService();
+			service.excute(request, response);
+			viewPage = "game/gameSearchDetailResult.jsp";
+			
+		} else if (comDo.equals("/managerView.do")) {
+			
+			service = new AdminManageService();
+			service.excute(request, response);
+			viewPage = "admin/managerView.jsp";
+			
+		} else if (comDo.equals("/manualView.do")) {
+			
+			viewPage = "main/menualView.jsp";
 			
 		}
 		

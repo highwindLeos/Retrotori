@@ -3,7 +3,7 @@
 table#profile{
 	width: 80%;
 	margin : 0 auto;
-	border: 1px solid #fff;
+	border: 1px solid #D1B6E1;
 	border-radius: 20px;
 	background-color : rgba(255, 255, 255, 0.6);
 }
@@ -14,7 +14,7 @@ img#profileLogo{
 	border: 5px solid #bbb;
 	border-radius: 50%;
 	margin-top: 30px;
-	margin-left: 30px;
+	margin-left: 50px;
 	margin-bottom: 30px;
 	-webkit-transition: all .25s; /* Safari */
    	transition: all .25s;
@@ -30,7 +30,7 @@ img#profileLogo{
 	position: absolute;
 	top : 30px;
 	right: 20px;
-	width: 35vw;
+	width: 100%;
 }
 
 .relative > table#pesonalInfo tr td {
@@ -66,9 +66,9 @@ img#profileLogo{
 .btnFollow {
 	position : relative;
 	top : -50px;
-	left : 40px;
+	left : 50px;
 	padding : 10px;
-	width: 160px;
+	width: 200px;
 	height: 40px;
 	border : none;
 	color : #fff;
@@ -82,4 +82,57 @@ img#profileLogo{
 		border-radius : 20px;
 		color : #000;
 		background-color: rgba(200, 200, 200, .8);
+	}
+	
+/* Modal PopUp  */
+.white_content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.8);
+    opacity:0;
+    -webkit-transition: opacity .2s ease-in;
+    -moz-transition: opacity .2s ease-in;
+    transition: opacity .2s ease-in;
+    pointer-events: none;
+}
+.white_content:target {
+    opacity:1;
+    pointer-events: auto;
+}
+.white_content > div {
+	position: absolute;
+	top: 35%;
+	left: 25%;
+	width: 50%;
+	height: 24%;
+	padding: 16px;
+	border: 1px solid orange;
+	border-radius : 25px;
+	background-color: white;
+	overflow: auto;	
+}
+
+#modalMenu > li {
+	padding: 12px;
+}
+	#modalMenu > li:nth-child(1) {
+		border-top: 1px solid #666;
+		border-bottom: 1px solid #666;
+	}
+
+#modalMenu > li > a > h2,
+#modalMenu > li > a > h3{
+	border : 2px solid #fff;
+	border-radius : 20px;
+	padding: 5px 10px;
+}
+
+
+	#modalMenu > li:hover > a > h2,
+	#modalMenu > li:hover > a > h3 {
+		color : lightCoral;
+		background-color: #D1B6E1;
 	}

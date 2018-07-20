@@ -136,7 +136,8 @@ COMMIT;
 -- 게임 테이블
 ---------------------------------------------------------------------------------------
 -- top-n 페이징 기능 (게임 리스트)
-SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 1) GRADEAVG 
+SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, 
+TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) GRADEAVG 
         FROM GAME GA, GGRADE R 
         WHERE
         GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT AND gId LIKE '2'
@@ -154,7 +155,7 @@ SELECT COUNT(*) FROM GAME;
 
 -- 게임 등록하기
 INSERT INTO GAME (gId, gName, gImage, gDes, gPub, gRdate, gGrade, gVoteCnt, gGno)
-VALUES (GAME_SEQ.NEXTVAL, '게임이름4', 'gameimage.jpg', '게임 설명4', '제작사4', '1984-07-05', 0, 0, 1);
+VALUES ('A'||GAME_SEQ.NEXTVAL, '게임이름4', 'gameimage.jpg', '게임 설명4', '제작사4', '1984-07-05', 0, 0, 1);
 
 COMMIT;
 -- 게임 정보수정
@@ -166,9 +167,9 @@ UPDATE GAME SET
             gRdate = '1988-06-05'
 WHERE gId = '2';
 
-UPDATE GAME SET GVOTECNT = 2500 WHERE GID = '2';
+UPDATE GAME SET GVOTECNT = 2500 WHERE GID = '22';
 -- 게임 삭제
-DELETE FROM GAME WHERE gId = '21';
+DELETE FROM GAME WHERE GID = '22';
 commit;
 rollback;
 -- 게임 투표 하기 
@@ -181,16 +182,48 @@ SELECT R.GGNO FROM GAME G, GGRADE R
 UPDATE GAME SET Ggno = (SELECT R.GGNO FROM GAME G, GGRADE R
                         WHERE GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT AND GID LIKE '%'||2)
                         WHERE GID LIKE '%'||2;
+                        
+-- 게임 검색 : 기본
+SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, 
+TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) GRADEAVG 
+        FROM GAME GA, GGRADE R 
+        WHERE
+        GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT 
+        AND UPPER(GNAME) LIKE '%'||''||'%' 
+        AND UPPER(GPUB)  LIKE '%'||''||'%' 
+        AND UPPER(GDES) LIKE '%'||''||'%'
+ORDER BY GRDATE DESC;
+
+SELECT * FROM GAME;
+DELETE FROM GAME WHERE GID = 'A돈킹콩 1982년';
+
+
+-- 게임 검색 : 상세검색
+SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT, 
+TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) GRADEAVG 
+        FROM GAME GA, GGRADE R 
+        WHERE
+        GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT 
+        AND UPPER(GNAME) LIKE '%'||''||'%' 
+        AND UPPER(GPUB)  LIKE '%'||''||'%' 
+        AND UPPER(GDES) LIKE '%'||''||'%'
+        AND GA.GGNO = 1
+        AND TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) >= 2 
+        AND UPPER(GID) LIKE 'A'||'%'
+ORDER BY GRDATE DESC;
 ------------------------------------------------
 -- 게임 코멘트 기능
 ------------------------------------------------
+SELECT * FROM COMANT;
 -- 게임의 대한 간단한 코멘트 달기
 INSERT INTO COMANT (CNUM, GID, MID, COMANT) 
 VALUES (COMANT_SEQ.NEXTVAL, '2', 'leo', '코멘트입니다');
 
-SELECT * FROM COMANT WHERE GID = '2';
+UPDATE MEMBER SET MPOINT = MPOINT + 5 WHERE MID = 'leo';
+
+SELECT * FROM COMANT WHERE GID = 'A42' ORDER BY CNUM desc;
 -- 코멘트 삭제
-DELETE FROM COMANT WHERE GID = '2' AND MID = 'leo';
+DELETE FROM COMANT WHERE CNUM = '25';
 
 commit;
 ROLLBACK;
@@ -237,7 +270,7 @@ DELETE FROM MEMBER WHERE MID = 'leo'and MPW = '1212';
 SELECT * FROM  
 (SELECT ROWNUM RN, A.* FROM (SELECT B.*, M.MNAME, MPHOTO FROM BOARD b, MEMBER M 
     WHERE M.MID = B.MID ORDER BY BREF DESC, BSTEP) A)  
-WHERE RN BETWEEN 1 AND 10;
+WHERE RN BETWEEN 1 AND 100;
 
 --게시글 상세보기
 SELECT B.*, M.MNAME , M.MPHOTO  FROM BOARD B, MEMBER M WHERE B.MID = M.MID AND  BNUM = 143;
@@ -296,6 +329,8 @@ INSERT INTO FOLLOW (FNUM, MID, FID) VALUES (FOLLOW_SEQ.NEXTVAL, 'leo', 'days');
 -- 언팔로우 하기
 DELETE FROM FOLLOW WHERE FID = 'days';
 
+DELETE FROM FOLLOW WHERE FNUM = 62;
+DELETE FROM FOLLOW;
 COMMIT;
 ------------------------------------------------
 -- 관리자 테이블
@@ -319,7 +354,6 @@ WHERE AID = 1;
 
 -- 관리자 삭제 
 DELETE FROM ADMIN WHERE AID = 'admin' AND APW = 'highwind26';
-
 
 ------------------------------------------------
 -- 공지사항

@@ -35,7 +35,7 @@
 	  </c:if>
 	  <c:if test="${totalCnt != 0 }">
 		  <c:forEach items="${list }" var="dto">
-			  <h4 class="nTitle boldCoral">${dto.nTitle } 
+			  <h4 class="nTitle">${dto.nTitle } 
 			  	<span class="nRdate">${dto.nRdate }</span>
 			  	<span class="nAuthor">작성자 : ${dto.nAuthor }</span>
 			  </h4>

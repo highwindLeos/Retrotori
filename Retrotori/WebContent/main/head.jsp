@@ -38,7 +38,7 @@
 		</c:if>
 		<c:if test="${not empty loginOk }">
 		<ul id="gnb">
-			<li><a href="">${sessionMdto.mName } 님 어서오세요</a></li>
+			<li>${sessionMdto.mName } 님 어서오세요</li>
 			<li><a href="${conPath }/profileView.do?mId=${sessionMdto.mId }"><i class="fas fa-user-circle"></i></i> 프로필[Profile]</a></li>
 			<li><a href="${conPath }/notice.do"><i class="fas fa-clipboard-list"></i> 공지사항[Notice]</a></li>
 			<li><a href="${conPath }/logout.do"><i class="fas fa-clipboard-list"></i> Log-Out</a></li>
@@ -46,7 +46,7 @@
 		</c:if>
 		<c:if test="${not empty adminOk }">
 		<ul id="gnb">
-			<li><a href="">관리자 접속 : ${Adto.aName } 님 어서오세요</a></li>
+			<li>관리자 Mode : ${sessionAdto.aName } 님 어서오세요</li>
 			<li><a href="${conPath }/managerView.do"><i class="fas fa-user-circle"></i></i> 관리페이지</a></li>
 			<li><a href="${conPath }/notice.do"><i class="fas fa-clipboard-list"></i> 공지사항[Notice]</a></li>
 			<li><a href="${conPath }/logout.do"><i class="fas fa-clipboard-list"></i> Log-Out</a></li>
@@ -55,12 +55,13 @@
 	</div>
 	<div id="logo">
 		<a href="${conPath }/mainView.do"><img class="logo" src="${conPath }/img/logo.png" alt="Logo" /></a>
+		<audio id="coin" src ="${conPath }/js/source/Coin.wav"></audio>
 	</div>
 	<div id="navi">
 		<ul id="lnb">
 			<li><a href="${conPath }/mainView.do"><i class="fas fa-home"></i> 홈</a></li>
-			<li><a href=""><i class="fab fa-glide"></i> 이용안내</a></li>
-			<li><a href=""><i class="fas fa-search"></i> 게임검색</a></li>
+			<li><a href="${conPath }/manualView.do"><i class="fab fa-glide"></i> 이용안내</a></li>
+			<li><a href="${conPath }/gameSearchView.do"><i class="fas fa-search"></i> 게임검색</a></li>
 			<li><a href="${conPath }/gameListView.do"><i class="fas fa-list-alt"></i> 게임리스트</a></li>
 			<li><a href="${conPath }/boardListView.do"><i class="fas fa-keyboard"></i> 자유게시판</a></li>
 		</ul>

@@ -30,7 +30,7 @@ public class AdminLoginService implements Service {
 			request.setAttribute("requestAdto", adto);
 			
 			session.setAttribute("adminOk", "ok");
-			session.setAttribute("Adto", adto);
+			session.setAttribute("sessionAdto", adto);
 			
 		} else if (checkResult == MemberDao.LOGIN_FAIL_ID) {
 			System.out.println("관리자 로그인 실패 아이디  : servlet");

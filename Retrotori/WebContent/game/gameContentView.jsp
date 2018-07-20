@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -19,6 +20,12 @@
 <c:if test="${not empty gameVoteResult }">
 	<script>swal('${gameVoteResult }', '', 'success');</script>
 </c:if>
+<c:if test="${not empty comantWriteResult }">
+	<script>swal('${comantWriteResult }', '', 'success');</script>
+</c:if>
+<c:if test="${not empty comantDeleteResult }">
+	<script>swal('${comantDeleteResult }', '', 'success');</script>
+</c:if>
 <div id="content">
 	<table>
 		<tr>
@@ -29,7 +36,9 @@
 		</tr>
 		<tr>
 			<td>
-				<p class="center"><img class="gameImage" src="${conPath }/gameImg/${gameContent.gImage }" alt="gameImage" /></p>
+				<p class="center">
+		        	<img class="gameImage" src="${conPath }/gameImg/${gameContent.gImage }" alt="gameImage" />
+				</p>
 				<hr />
 				<table class="center">
 					<tr>
@@ -47,9 +56,9 @@
 						<td colspan="2">게임등급</td>
 					</tr>
 					<tr>
-						<td colspan="2"><h4>${gameContent.gGrade }</h4></td>
-						<td colspan="1"><h4>${gameContent.gVoteCnt }</h4></td>
-						<td colspan="1"><h4>${gameContent.gradeAvg }</h4></td>
+						<td colspan="2"><h4>${gameContent.gGrade } Point</h4></td>
+						<td colspan="1"><h4>${gameContent.gVoteCnt } 명 참여</h4></td>
+						<td colspan="1"><h4>${gameContent.gradeAvg } 점</h4></td>
 						<td colspan="2">
 							<c:if test="${gameContent.gGno == 1 }">
 								<img class="gradeImg" src="${conPath }/img/grade/bronze.png" alt="bronze" />
@@ -71,7 +80,7 @@
 							</c:if>
 						</td>
 					</tr>
-					<c:if test="${not empty loginOk }">
+					<c:if test="${not empty loginOk or not empty adminOk }">
 					<tr>
 						<td colspan="6">
 							<form action="${conPath }/gameVote.do" method="POST">
@@ -90,6 +99,8 @@
 							    <input type="radio" name="star-input" id="p10" value="10"><label for="p10">10</label>
 							  </span>
 							  <output for="star-input"><b>0</b>점</output>
+							  <br />
+							  <br />
 							  	<input type="submit" value="평점주기" />
 							</span>
 							</form>
@@ -98,25 +109,48 @@
 				    </c:if>
 					<tr>
 						<td colspan="6">
-							<pre>${gameContent.gDes }</pre>
+							${gameContent.gDes }
 						</td>
 					</tr>
 					<tr>
 						<td colspan="6">
 							<h4 class="left">Comment</h4>
-							<p><span></span></p>
+							<c:if test="${empty comantList }">
+								<p id="comant" class="center"><span class="boldCoral">표시할 코멘트가 없습니다.</span></p>
+							</c:if>
+							<c:forEach var="comants" items="${comantList }">
+								<p id="comant" class="left">
+									<span><a class="boldCoral" href="${conPath }/profileView.do?mId=${comants.mId }">${comants.mId }</a></span> : ${comants.comant }
+									<c:if test="${sessionMdto.mId == comants.mId or not empty adminOk }">
+									<span class="comantDelete">
+										<a href="${conPath }/deleteComant.do?cNum=${comants.cNum }&gId=${gameContent.gId }"><i class="fas fa-trash-alt"></a></i>
+									</span>
+									</c:if>
+								</p>
+							</c:forEach>
 						</td>
 					</tr>
+					<c:if test="${not empty loginOk }">
 					<tr>
-						<td colspan="6" class="left">
-							<form action="${conPath }/commantWrite.do">
-								<input type="hidden" name="gId" value="${gameContent.gId }"/>
+						<td colspan="6" class="center">
+							<form action="${conPath }/comantWrite.do" method="POST">
+								<input type="hidden" name="gId" value="${gameContent.gId}"/>
+								<input type="hidden" name="mId" value="${sessionMdto.mId}"/>
 								<span><input type="text" name="comant" placeholder="코멘트를 입력해주세요" required="required" /></span>
 								<p><input type="submit" value="코멘트달기" /></p>
 							</form>
 						</td>
 					</tr>
+					</c:if>
 				</table>
+			</td>
+		</tr>
+		<tr>
+			<td class="center">
+			<c:if test="${not empty adminOk }">
+				<input type="button" value="수정하기" onclick="location.href = '${conPath }/gameModifyView.do?gId=${gameContent.gId }'" />
+				<input type="button" value="삭제하기" onclick="location.href = '${conPath }/gameDelete.do?gId=${gameContent.gId }'" />
+			</c:if>
 			</td>
 		</tr>
 		<tr>

@@ -12,7 +12,7 @@
 	display: inline-block;
 	margin:0;
 	margin-bottom: 15px;
-	border: 3px solid rgba(0, 0, 0, 0.3);
+	border : 1px solid #bbb;
 	border-radius : 10px;
 	text-align : center;
 	padding:10px;
@@ -41,7 +41,7 @@
 
 /* 게임 상세 보기*/
 #content {
-	width: 75%;
+	width: 85%;
 	margin : 0 auto 15px;
 	background: rgba(255,255,255, .8);
 }
@@ -50,6 +50,11 @@
 	width: 100%;
 }
 
+.contentTitle{
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+}
 
 .gameTitle{
 	width: 18px;
@@ -58,7 +63,7 @@
 	margin-right: 15px;	
 }
 
-#content table tr:nth-child(1) {
+#content table.center > tbody > tr:nth-child(1) {
 	font-size: 1.1em;
 	font-weight: bold;
 	background-color: #717F9A;
@@ -67,7 +72,6 @@
 #content > tr:nth-child(2) {
 	font-size: .8em;
 	background-color: #F5F6F6;
-	
 }
 
 #content tr td {
@@ -76,10 +80,19 @@
 }
 
 .gameImage{
-	width: 200px;
-	height: 200px;
+	width: 25vw;
+	height: 60vh;
 	padding: 5px;
 	border: 1px solid #666;
+	border-radius : 20px;
+}
+
+.gameSearch{
+	width: 150px;
+	height: 150px;
+	padding: 5px;
+	border: 1px solid #666;
+	border-radius : 20px;
 }
 
 .gradeImg{
@@ -122,11 +135,72 @@
 		bottom : 20px;
 		left: 240px;
 	}
+#comant{
+	position : relative;
+	margin : 10px 20px;
+	border:  1px solid darkGray;
+	border-radius : 10px;
+	padding: 10px 20px; 
+}
+	#comant:hover{
+		background-color:  lightBlue;
+	}	
+
+.comantModify{
+	position: absolute;
+	top : 5px;
+	font-size : 20px;
+	right : 100px;
+	border : 1px solid #666;
+	border-radius : 10px;
+	padding: 2px 10px;
+}
+
+.comantDelete{
+	position: absolute;
+	top : 5px;
+	right : 50px;
+	font-size : 20px;
+	border : 1px solid #666;
+	border-radius : 10px;
+	padding: 2px 10px;
+}
+
+	.comantModify:hover,
+	.comantDelete:hover {
+		color: #fff;
+		background-color : #666;
+		cursor: pointer;
+	}
+
+/* 데이터 픽커 커스터마이징*/
+#datepicker2 a {
+	color: darkGray;
+}
+
+.ui-datepicker-calendar thead tr:nth-child(1) {
+	background-color: lightCoral;
+}
+
+.ui-datepicker-calendar thead tr:nth-child(1) th {
+	padding : 15px;
+}
+
+#gIdTag,
+#gGrade,
+#gradeAvg {
+	border: 3px solid lightCoral;
+	width: 250px;
+	height: 50px;
+	text-align: center;
+	font-size : 1.1em;
+}
+
 /* 코멘트 */
 input[type="text"] {
 		width : 90%;
 		height : 30px;
-		border : 1px dotted #037aab;
+		border : 2px dashed #037aab;
 		border-radius : 15px;
 		padding : 5px 20px;
 		margin-bottom : 15px;

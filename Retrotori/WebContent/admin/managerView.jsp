@@ -6,17 +6,17 @@
 <fmt:requestEncoding value="utf-8"/>
 <!DOCTYPE html>
 <html>
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Title</title>
-	<link href="conPath/css/.css" rel="stylesheet">
-	<script>
-
-	</script>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="" rel="stylesheet">
+		<script></script>
+		<title>관리페이지</title>
+	</head>
 <body>
 <jsp:include page="../main/head.jsp" />
 
-<jsp:include page="../main/footer.jsp" />	
+
+<jsp:include page="../main/footer.jsp" />
 </body>
 </html>

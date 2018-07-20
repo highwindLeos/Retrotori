@@ -120,5 +120,4 @@ public class MJoinService implements Service {
 		
 		}// if end
 	}
-
 }
