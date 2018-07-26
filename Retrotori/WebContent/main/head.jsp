@@ -46,7 +46,7 @@
 		</c:if>
 		<c:if test="${not empty adminOk }">
 		<ul id="gnb">
-			<li>관리자 Mode : ${sessionAdto.aName } 님 어서오세요</li>
+			<li>관리자 Mode : ${sessionAdto.aName }</li>
 			<li><a href="${conPath }/managerView.do"><i class="fas fa-user-circle"></i></i> 관리페이지</a></li>
 			<li><a href="${conPath }/notice.do"><i class="fas fa-clipboard-list"></i> 공지사항[Notice]</a></li>
 			<li><a href="${conPath }/logout.do"><i class="fas fa-clipboard-list"></i> Log-Out</a></li>

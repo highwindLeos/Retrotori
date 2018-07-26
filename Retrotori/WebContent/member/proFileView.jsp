@@ -38,7 +38,12 @@
 	</tr>
 	<tr>
 		<td colspan="1">
-			<a href="#open"><img id="profileLogo" src="${conPath }/memberPhoto/${Mdto.mPhoto }" alt="회원사진" /></a>
+			<c:if test="${sessionMdto.mId == Mdto.mId }">
+				<a href="#open"><img id="profileLogo" src="${conPath }/memberPhoto/${Mdto.mPhoto }" alt="회원사진" /></a>
+			</c:if>
+			<c:if test="${sessionMdto.mId != Mdto.mId }">
+				<img id="profileLogo" src="${conPath }/memberPhoto/${Mdto.mPhoto }" alt="회원사진" />
+			</c:if>
 			<br />
 			<br />
 			<br />
@@ -139,6 +144,60 @@
 		<hr>
 			<h4>최근의 작성한 글 리스트</h4>
 		<hr>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<table id="newList" class="center">
+				<tr>
+					<th colspan="6"><h3>최근 작성한 자유게시판 글</h3></th>
+				</tr>			
+				<tr>
+					<th>글번호</th>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>제목</th>
+					<th>조회수</th>
+					<th>좋아요 수</th>
+				</tr>
+			<c:if test="${empty newBoradList }">
+				<tr>
+					<td colspan="6">작성한 자유게시판 글이 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach items="${newBoradList }" var="boardNewList">
+				<tr>
+					<td>${boardNewList.bNum }</td>
+					<td>${boardNewList.mId }</td>
+					<td>${boardNewList.mName }</td>
+					<td><a href="${conPath }/boardContentView.do?bNum=${boardNewList.bNum }">${boardNewList.bTitle }</a></td>
+					<td>${boardNewList.bCnt }</td>
+					<td>${boardNewList.bLike }</td>
+				</tr>
+			</c:forEach>
+			</table>
+		</td>
+		<td colspan="2">
+			<table id="newList" class="center">			
+				<tr>
+					<th colspan="2"><h3>최근 쓴 Game 게시판 Comant</h3></th>
+				</tr>
+				<tr>
+					<td>게임 아이디</td>
+					<td>코멘트</td>
+				</tr>
+			<c:if test="${empty newComantList }">
+				<tr>
+					<td colspan="6">작성한 게임 코멘트가 없습니다.</td>
+				</tr>
+			</c:if>
+			<c:forEach items="${newComantList }" var="comantNewList">
+				<tr>
+					<td><a href="${conPath }/gameContentView.do?gId=${comantNewList.gId }">${comantNewList.gId }</a></td>
+					<td><a href="${conPath }/gameContentView.do?gId=${comantNewList.gId }">${comantNewList.comant }</a></td>
+				</tr>
+			</c:forEach>
+			</table>
 		</td>
 	</tr>
 </table>

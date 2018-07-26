@@ -81,6 +81,49 @@ public class ComantDao {
 		return cDtos;
 	}
 	
+	public ArrayList<ComantDto> getComantNewListMemberId(String mId) {
+		ArrayList<ComantDto> cDtos = new ArrayList<ComantDto>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "SELECT * FROM " + 
+					 " (SELECT ROWNUM RN, A.* FROM (SELECT * FROM COMANT ORDER BY CNUM DESC) A) " + 
+					 " WHERE RN BETWEEN 1 AND 5 AND MID = ?";
+		
+		try {
+			conn = getConnetion();
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, mId);
+			
+			rs = pstmt.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					int cNum = rs.getInt("CNUM");
+					String gId = rs.getString("GID");
+					mId = rs.getString("MID");
+					String comant = rs.getString("COMANT");
+					
+					cDtos.add(new ComantDto(cNum, gId, mId, comant));					
+				} while (rs.next());
+			}
+						
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {}
+		}
+				
+		return cDtos;
+	}
+	
 	private int memberPointUp5Point(String mId) {
 		int result = FAIL;
 		

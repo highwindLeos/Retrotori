@@ -31,7 +31,7 @@
 		<tr>
 			<td>
 				<h2><img class="gameTitle" src="${conPath }/img/contentTitle.png" alt="title" />
-				${gameContent.gName }</h2>
+				${gameContent.gName } [ ${gameContent.gId } ]</h2>
 			</td>
 		</tr>
 		<tr>
@@ -80,7 +80,7 @@
 							</c:if>
 						</td>
 					</tr>
-					<c:if test="${not empty loginOk or not empty adminOk }">
+					<c:if test="${not empty loginOk }">
 					<tr>
 						<td colspan="6">
 							<form action="${conPath }/gameVote.do" method="POST">
