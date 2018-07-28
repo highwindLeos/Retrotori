@@ -310,3 +310,10 @@ input[type="text"] {
     vertical-align: middle;
 }
 
+/* pageing div 수정*/
+#pageBoard {
+	width : 95%;
+	margin : 10px auto;
+	padding : 15px;
+	background-color: rgba(0,0,0,.3);
+}
