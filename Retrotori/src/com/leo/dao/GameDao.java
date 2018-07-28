@@ -102,7 +102,7 @@ public class GameDao {
 					 "    (SELECT ROWNUM RN, A.* FROM " + 
 					 "    (SELECT GID, GNAME, GIMAGE, GDES, GPUB, GRDATE, GGRADE, GVOTECNT, GA.GGNO, GRNAME, LOWPOINT, HIPOINT " + 
 					 "        FROM GAME GA, GGRADE R " + 
-					 "        WHERE GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT ORDER BY GRDATE DESC) A) " + 
+					 "        WHERE GGRADE BETWEEN R.LOWPOINT AND R.HIPOINT) A) " + 
 					 "WHERE RN BETWEEN 1 AND 8";
 		
 		try {
@@ -218,7 +218,7 @@ public class GameDao {
 					"	        AND GA.GGNO = ? " + 
 					"	        AND TRUNC((NVL(GGRADE / DECODE(GVOTECNT, 0, null, GVOTECNT), 0) * 10) / 10, 2) >= ? " + 
 					"	        AND UPPER(GID) LIKE ?||'%' " + 
-					"	ORDER BY GRDATE DESC";
+					" ORDER BY GRDATE DESC";
 		
 		try {
 			conn = getConnection();
@@ -358,7 +358,8 @@ public class GameDao {
 		
 		try {
 			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);		
+			pstmt = conn.prepareStatement(sql);
+			
 			pstmt.setString(1, gId);
 			
 			rs = pstmt.executeQuery();
