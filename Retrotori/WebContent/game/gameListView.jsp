@@ -20,9 +20,6 @@
 <c:if test="${not empty gameDeleteResult }">
 	<script>swal('${gameDeleteResult }','','success');</script>
 </c:if>
-<c:if test="${not empty modifyGameResult }">
-	<script>swal('${modifyGameResult }','','success');</script>
-</c:if>
 <div id="games">
 	 <c:if test="${totalCnt eq 0 }">
 	 <figure>

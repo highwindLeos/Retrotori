@@ -40,9 +40,9 @@ $( function() {
 	    		}
 	    		// minDate : 0 // 지나간 날은 선택이 안됨
 	    	}); // datepicker
-	    
-	    // 게임 입력창
+	    // 게임 
 	    var defaultDate = new Date(1982, 6, 1, 0, 0, 0, 0); 
+	    출처: http://zzaps.tistory.com/75 [궁극의 잡 블로그]
 	    $( "#datepicker2" ).datepicker(
 	    	{
 	    		defaultDate: defaultDate,

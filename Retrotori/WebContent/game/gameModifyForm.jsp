@@ -120,7 +120,7 @@
 		<tr>
 			<td>
 				<div id="datepicker2"></div><span id="dateResult">${gameDto.gRdate }</span>
-				<input type="hidden" id="gRdate" name="gRdate" value="${gameDto.gRdate }" />
+				<input type="hidden" id="gRdate" name="gRdate"  />
 			</td>
 		</tr>
 		<tr>

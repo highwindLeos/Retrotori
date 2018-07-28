@@ -310,10 +310,3 @@ input[type="text"] {
     vertical-align: middle;
 }
 
-/* pageBoard */
-div#pageBoard {
-	width : 100%;
-	margin : 10px auto;
-	padding : 15px;
-	background-color: rgba(0, 0, 0, .3);
-}
