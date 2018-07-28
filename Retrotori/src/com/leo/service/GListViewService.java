@@ -23,7 +23,7 @@ public class GListViewService implements Service {
 		
 		int currentPage = Integer.parseInt(pageNum);
 		
-		int PAGESIZE = 10, BLOCKSIZE = 5;
+		int PAGESIZE = 15, BLOCKSIZE = 5;
 		
 		int startRow = (currentPage - 1) * PAGESIZE + 1; 
 		int endRow = startRow + PAGESIZE - 1;
